@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" ToolsVersion="14.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="CRYPTER|x64">
+      <Configuration>CRYPTER</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="HEXEMBED|x64">
+      <Configuration>HEXEMBED</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="STUB|x64">
+      <Configuration>STUB</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="QtConf">
+    <QtVersion>5.12.4</QtVersion>
+    <QTDIR>$(QtRootPath)</QTDIR>
+    <QtExternalDir>$(QtRootPath)</QtExternalDir>
+  </PropertyGroup>
+  <PropertyGroup Label="Globals">
+    <ProjectGuid>{8f3e5a32-d3db-4296-9390-af2381b0a1dd}</ProjectGuid>
+    <Keyword>Win32Proj</Keyword>
+    <RootNamespace>MyCrypter</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <Import Project="$(ProjectDir)cfg\winapp.props" Label="ProjectConfig" />
+  <Import Project="$(ProjectDir)cfg\dejainsight.props" Condition="'$(dejainsight_integration)' == ''" />
+  <PropertyGroup Label="Configuration">
+    <ConfigurationType>Application</ConfigurationType>
+    <PlatformToolset>v142</PlatformToolset>
+    <LinkIncremental>false</LinkIncremental>
+  </PropertyGroup>
+  <ItemGroup>
+    <RootQRCFiles Include="$(SolutionDir)*.qrc" />
+    <AllPs1Files Include="$(SolutionDir)res\**\*.ps1" />
+    <RCCFiles Include="$(SolutionDir)*.rcc" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)'=='STUB'">
+    <TargetName>stub</TargetName>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='CRYPTER'">
+    <TargetName>crypter</TargetName>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)'=='HEXEMBED'">
+    <TargetName>hex-embed</TargetName>
+    <GenerateManifest>false</GenerateManifest>
+  </PropertyGroup>
+  <ItemDefinitionGroup>
+    <ClCompile>
+      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='CRYPTER|x64'">stdcpp20</LanguageStandard>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='HEXEMBED|x64'">stdcpp20</LanguageStandard>
+      <LanguageStandard Condition="'$(Configuration)|$(Platform)'=='STUB|x64'">stdcpp20</LanguageStandard>
+    </ClCompile>
+    <PreBuildEvent>
+      <Command Condition="'$(Configuration)|$(Platform)'=='CRYPTER|x64'">$(ProjectOutputDirectory)\hex-embed $(ProjectOutputDirectory)\stub.exe &gt; $(ProjectDir)..\src\Stub.h</Command>
+    </PreBuildEvent>
+  </ItemDefinitionGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+  <ItemGroup>
+    <ClCompile Include="..\src\crypter.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='STUB|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='HEXEMBED|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\hexembed.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='STUB|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='CRYPTER|x64'">true</ExcludedFromBuild>
+    </ClCompile>
+    <ClCompile Include="..\src\stub.cpp">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='CRYPTER|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='HEXEMBED|x64'">true</ExcludedFromBuild>
+      <DebugInformationFormat>None</DebugInformationFormat>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\src\Stub.h">
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='STUB|x64'">true</ExcludedFromBuild>
+      <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='HEXEMBED|x64'">true</ExcludedFromBuild>
+    </ClInclude>
+  </ItemGroup>
+</Project>
