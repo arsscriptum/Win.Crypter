@@ -95,26 +95,14 @@ goto :init
     call %__makefile% /v /i %__build_cfg% /t Build /c %config% /p %platform%
     goto :finished
 
-:call_make_build_export
-    set config=%1
-    set platform=%2
-    set export_path=%3
-    call %__makefile% /v /i %__build_cfg% /t Build /c %config% /p %platform% /x %export_path%
-    goto :finished
-
-:: ==============================================================================
-::   Build static
-:: ==============================================================================
-:build_x86
-    call :call_make_build Debug x86
-    call :call_make_build Release x86
-    goto :eof
 
 :: ==============================================================================
 ::   Build x64
 :: ==============================================================================
 :build_x64
-    call :call_make_build_export Release x64 "c:\Programs\SystemTools"
+    call :call_make_build HEXEMBED x64
+    call :call_make_build STUB x64
+    call :call_make_build CRYPTER x64
     goto :eof
 
 :: ==============================================================================
@@ -132,18 +120,6 @@ goto :init
 ::   Build
 :: ==============================================================================
 :build
-    call :clean_bin
-    call :clean_tmp
-	
-	if "%__target%" == "clean" (
-		call :clean
-		goto :finished
-		)
-    if "%__target%" == "rebuild" (
-		call :clean
-		)
-    
-    ::call :build_x86
     call :build_x64
     goto :finished
 
