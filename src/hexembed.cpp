@@ -1,7 +1,12 @@
-/*
- * hexembed - a simple utility to help embed files in C programs
- *
- */
+//==============================================================================
+//
+//  hexembed - a simple utility to help embed files in C programs
+//  
+//============================================================================
+//  Copyright (C) Guilaume Plante 2020 <guillaumeplante.qc@gmail.com>
+//==============================================================================
+
+
 
 #include <windows.h>
 #include <string>

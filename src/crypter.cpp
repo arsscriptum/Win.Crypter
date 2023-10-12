@@ -1,3 +1,13 @@
+//==============================================================================
+//
+//  Windows Application Crypter (console application)
+//
+//============================================================================
+//  Copyright (C) Guilaume Plante 2020 <guillaumeplante.qc@gmail.com>
+//==============================================================================
+
+
+
 #include <iostream>
 #include <windows.h>
 #include <fstream>

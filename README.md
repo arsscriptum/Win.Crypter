@@ -1,9 +1,6 @@
-𝓐𝓡𝓢 𝓢𝓒𝓡𝓘𝓟𝓣𝓤𝓜
--------------------------------------
+# Crypter : General Informations
 
-## Crypter : General Informations
-
-### Overview
+## Overview
 
 A runtime Crypter written in C++ for native x64 PE files to bypass AVs signature based detection.
 
@@ -26,3 +23,8 @@ Or simply via drag & drop
 ![test](https://user-images.githubusercontent.com/79810730/210828228-24d4813f-6294-4832-afe0-1f2feb301bae.gif)
 
 For more information and improvement tips visit my github [pages](https://ricky5panish.github.io/pe-runtime-crypter.html)
+
+
+## Demo
+
+![Demo](doc/demo.gif)
